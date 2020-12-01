@@ -51,9 +51,9 @@ public:
     bool exist(vector<vector<char>>& board, string word) {
         for(int i = 0; i < board.size(); i++)
         {
-            for(int j = 0; j < board[i].size(); j++)
-            {
-                if(backtrack(board, word, 0, i, j))
+            for(int j = 0; j < board[0].size(); j++)
+            {   
+                if(backtrack(board, word, 0, i , j))
                     return true;
             }
         }
@@ -69,12 +69,14 @@ private:
         char temp = board[x][y];
         board[x][y] = 0;
         wordIndex++;
-        if((x > 0 && backtrack(board, word, wordIndex, x-1, y)) //往上走
-            || (y > 0 && backtrack(board,word, wordIndex, x, y-1)) //往左走
-            || (x < board.size()-1 && backtrack(board, word, wordIndex, x+1, y))   //往下走
-            || (y < board[0].size()-1 && backtrack(board, word, wordIndex, x, y+1)))   //往右走
+        if(
+            (x > 0 && backtrack(board, word, wordIndex, x - 1, y))||
+            (x < board.size()-1 && backtrack(board, word, wordIndex, x + 1, y))||
+            (y > 0 && backtrack(board, word, wordIndex, x, y - 1))||
+            (y < board[0].size()-1 && backtrack(board, word, wordIndex, x, y + 1))
+        )
             return true;
-        board[x][y] = temp;     //回溯到之前的位置
+        board[x][y] = temp;
         return false;
     }
 };

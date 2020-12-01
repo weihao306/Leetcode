@@ -36,21 +36,20 @@ class Solution {
 public:
     vector<string> generateParenthesis(int n) {
         vector<string> ans;
-        DFS(ans, "", 0, 0, n);
+        generate(ans, "", 0 , 0 , n);
         return ans;
     }
-
-    void DFS(vector<string> &ans, string str, int l, int r, int n)
+    void generate(vector<string> &ans, string str, int l, int r, int n)
     {
-        if(l > n || r > n || r > l) return;
+        if(l > n || r > n || r > l)
+            return;
         if(l == n && r == n)
         {
             ans.push_back(str);
             return;
-        } 
-        DFS(ans, str + '(', l+1, r, n);
-        DFS(ans, str + ')', l, r+1, n);
-
+        }
+        generate(ans, str+'(', l+1, r, n);
+        generate(ans, str+')', l, r+1, n);
         return;
     }
 };

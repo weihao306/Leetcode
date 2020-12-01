@@ -63,6 +63,7 @@ private:
     {
         if(root == nullptr)
             return;
+        //到达叶子结点，且路径和为目标值
         else if(root->left == nullptr && root->right == nullptr && sum - root->val == 0)
         {
             pass.push_back(root->val);
@@ -70,10 +71,10 @@ private:
             pass.pop_back();
             return;
         }
-        pass.push_back(root->val);  //加入一个可能解
+        pass.push_back(root->val);  //加入可能解
         backtrack(root->left, sum - root->val, pass);
         backtrack(root->right, sum - root->val, pass);
-        pass.pop_back();   //回溯 
+        pass.pop_back();    //回溯
     }
 };
 // @lc code=end
